@@ -1,53 +1,153 @@
-# Aircraft Damage Detection & Captioning
+# ✈️ Aircraft Damage Detection & Captioning
 
-## ✨ Project Overview
-This project implements a dual-stage automated system for aircraft maintenance and safety inspection. It combines computer vision for classification with advanced Vision-Language Models (VLM) for descriptive reporting.
+🚀 An intelligent dual-stage system that detects aircraft damage and generates human-like inspection reports using Deep Learning + Vision-Language Models.
 
-### ✅ Key Features
-1.  **Damage Classification:** Automates the detection of aircraft surface defects, specifically classifying them into **'dent'** and **'crack'** categories using Deep Learning.
-2.  **Image Captioning:** Generates natural language descriptions of identified damage using the BLIP model.
-3.  **Damage Summarization:** Provides detailed summaries of localized damage to assist inspectors in reporting.
+---
 
-## ⚙ Technical Stack
-- **Deep Learning Frameworks:** 
-    - **TensorFlow/Keras:** Used for the classification model and custom layer integration.
-    - **PyTorch:** Backend for the Hugging Face Transformers models.
-- **Architectures:** 
-    - **VGG16:** Pre-trained on ImageNet, used as a feature extractor for the classification task.
-    - **BLIP (Bootstrapping Language-Image Pretraining):** Utilized for generating image captions and summaries.
-- **Data Processing:** 
-    - **Keras ImageDataGenerator:** For real-time data augmentation and normalization.
-    - **PIL (Pillow):** For image handling and processing.
-- **Libraries:** `transformers`, `numpy`, `matplotlib`, `tarfile`.
+## 🔍 Overview
 
-## ☁ Model Architecture
+Aircraft inspection is critical for safety, but manual analysis is time-consuming and error-prone.
 
-### 1. Classification Model
-- **Base:** VGG16 (frozen layers).
-- **Head:** 
-    - Flatten layer
-    - Dense Layer (512 units, ReLU)
-    - Dropout (0.3)
-    - Dense Layer (512 units, ReLU)
-    - Dropout (0.3)
-    - Final Dense Layer (1 unit, Sigmoid activation)
-- **Optimizer:** Adam (LR=0.0001)
-- **Loss:** Binary Crossentropy
+This project automates the process by combining:
 
-### 2. Captioning & Summarization
-- Uses a custom **Keras Layer** (`BlipCaptionSummaryLayer`) that wraps the `Salesforce/blip-image-captioning-base` model.
-- Supports two tasks: `caption` (broad description) and `summary` (detailed technical description).
+- 🧠 Computer Vision (CNN) for damage classification  
+- 🗣️ Vision-Language Models (VLM) for descriptive reporting  
 
-## ⚖ How to Use
-1.  **Environment Setup:** Install requirements using the provided shell commands in the notebook.
-2.  **Dataset:** The notebook automatically downloads and extracts the Aircraft Damage Dataset.
-3.  **Training:** Run the classification section to train the VGG16-based model.
-4.  **Inference:** Use the `generate_text` helper function to process any aircraft damage image for automated description.
+💡 The system not only detects damage but also explains it in natural language, making it highly useful for inspectors and maintenance teams.
 
-## ⌛ Results
-- **Classification Accuracy:** Achieved ~70% on test data using frozen VGG16 features.
-- **VLM Output Examples:** 
-    - *Caption:* "this is a picture of a plane"
-    - *Summary:* "this is a detailed photo showing the damage to the fuselage of the aircraft"
+---
+
+## ✨ Key Features
+
+### ✅ Damage Classification
+- Detects aircraft surface defects  
+- Classifies into:
+  - 🔸 Dent  
+  - 🔹 Crack  
+
+### ✅ Image Captioning
+- Generates general descriptions of aircraft images  
+
+### ✅ Damage Summarization
+- Produces detailed, technical explanations of detected damage  
+
+---
+
+## 🧠 Model Architecture
+
+### 🔹 1. Classification Model
+- **Base Model:** VGG16 (pre-trained on ImageNet, frozen layers)  
+- **Custom Head:**
+  - Flatten  
+  - Dense (512, ReLU)  
+  - Dropout (0.3)  
+  - Dense (512, ReLU)  
+  - Dropout (0.3)  
+  - Output (Sigmoid)  
+
+- ⚙️ Optimizer: Adam (LR = 0.0001)  
+- 📉 Loss Function: Binary Crossentropy  
+
+---
+
+### 🔹 2. Captioning & Summarization
+- **Model:** BLIP (Bootstrapping Language-Image Pretraining)  
+- Integrated via custom Keras layer:  
+  `BlipCaptionSummaryLayer`
+
+📌 Supports:
+- Caption Mode → General description  
+- Summary Mode → Detailed inspection-level explanation  
+
+---
+
+## ⚙️ Tech Stack
+
+### 🚀 Core Technologies
+- Python  
+- TensorFlow / Keras  
+- Deep Learning  
+- Computer Vision  
+
+### 📚 Libraries & Tools
+- NumPy  
+- OpenCV  
+- Matplotlib  
+- Transformers (Hugging Face)  
+
+---
+
+## ☁️ Workflow
+
+### 1️⃣ Data Preparation
+- Dataset auto-downloaded & extracted  
+- Augmentation using `ImageDataGenerator`  
+
+### 2️⃣ Model Training
+- Train VGG16-based classifier  
+
+### 3️⃣ Inference Pipeline
+- Input aircraft image  
+- Predict damage type  
+- Generate:
+  - Caption 📝  
+  - Summary 📄  
+
+---
+
+## 📊 Results
+
+- 📌 **Classification Accuracy:** ~70%
+
+### 🧾 Sample Outputs
+
+**Caption:**
+```
+this is a picture of a plane
+```
+
+**Summary:**
+```
+this is a detailed photo showing the damage to the fuselage of the aircraft
+```
+
+---
+
+## 🚀 How to Use
+
+### 🔧 Setup
+```bash
+pip install -r requirements.txt
+```
+
+### ▶️ Run
+1. Train the classification model  
+2. Use the helper function:
+
+```python
+generate_text(image_path, mode="caption")   # or "summary"
+```
+
+---
+
+## 💡 Future Improvements
+
+- 🔼 Improve accuracy using fine-tuning (unfreeze VGG16 layers)  
+- 🧠 Try advanced models like EfficientNet / ViT  
+- 📊 Add bounding box localization (object detection)  
+- 📝 Improve caption quality using BLIP-2 or GPT-based VLMs  
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!  
+Feel free to fork the repo, improve it, and submit a PR.
+
+---
+
+## 📌 Author
+
+👤 **Manab Barman**
 
 ---
